@@ -6,7 +6,6 @@ from rest_framework import status
 from rest_framework import filters
 from .models import Song
 from .serializers import SongSerializer
-from songs import serializers
 
 # Create your views here.
 
@@ -15,7 +14,7 @@ def music(request):
     songs = Song.objects.all()
     song_types_param = request.query_params.get('title')
     sort_param = request.query_params.get('sort')
-    custom_response_dictionary = {}
+
     if song_types_param:
         songs = songs.filter(song_type__type = song_types_param)
         serializer = SongSerializer(songs, many=True)
